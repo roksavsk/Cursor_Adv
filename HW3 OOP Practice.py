@@ -126,13 +126,14 @@ class Realtor(metaclass=RealtorMeta):
 
 
 if __name__ == '__main__':
-    person = Person('Percival', '25', 1000)
-    house1 = Home('70', 20000)
-    realtor = Realtor('Lancelot', 15, 3)
-    person.info()
-    person.make_money()
-    realtor.provide_info()
-    realtor.give_discount()
-    house1.apply_discount(realtor)
-    person.buy_house(house1)
-    realtor.steal_money(person, house1)
+    person1 = Person('Percival', 25, 1000)
+    house1 = Home(70, 20000)
+    realtor1 = Realtor('Lancelot', 15, 3)
+    person1.info()
+    person1.make_money()
+    realtor1.provide_info()
+    realtor1.give_discount()
+    house1.apply_discount(realtor1)
+    person1.buy_house(house1)
+    realtor1.steal_money(person1, house1)
+
