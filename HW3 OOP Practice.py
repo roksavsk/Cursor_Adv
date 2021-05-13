@@ -111,7 +111,9 @@ class Realtor(metaclass=RealtorMeta):
         self.discount = discount
 
     def provide_info(self):
-        print(f"Hi, my name is {self.name}. I'm realtor and have {len(self.houses)} houses to sell and can give {self.discount}% discount. I can offer you such options:")
+        print(
+            f"Hi, my name is {self.name}. I'm realtor and have {len(self.houses)} houses to sell and can give {self.discount}% discount.\n"
+            f"I can offer you such options:")
         for house in self.houses:
             print(f"This house has {house.area} area and costs {house.cost}.")
 
