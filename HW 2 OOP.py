@@ -59,36 +59,37 @@ class Panther(Animals):
     def hunt(self):
         print(f"{self.name} is hunting")
 
+        
+if __name__ == "__main__":
+    tom = Cat("Tom")
+    sirius = Dog("Sirius")
+    tweety = Bird("Tweety")
+    jerry = Mouse("Jerry")
+    bagheera = Panther("Bagheera")
 
-tom = Cat("Tom")
-sirius = Dog("Sirius")
-tweety = Bird("Tweety")
-jerry = Mouse("Jerry")
-bagheera = Panther("Bagheera")
+    tom.eat()
+    tom.sleep()
+    tom.purr()
+    tom.scratch()
+    print(isinstance(tom, Animals))
 
-tom.eat()
-tom.sleep()
-tom.purr()
-tom.scratch()
-print(isinstance(tom, Animals))
+    sirius.eat()
+    sirius.sleep()
+    sirius.bark()
+    sirius.dig()
+    print(isinstance(sirius, Animals))
 
-sirius.eat()
-sirius.sleep()
-sirius.bark()
-sirius.dig()
-print(isinstance(sirius, Animals))
+    tweety.tweet()
+    tweety.fly()
+    print(isinstance(tweety, Animals))
 
-tweety.tweet()
-tweety.fly()
-print(isinstance(tweety, Animals))
+    jerry.squeak()
+    jerry.hide()
+    print(isinstance(jerry, Animals))
 
-jerry.squeak()
-jerry.hide()
-print(isinstance(jerry, Animals))
-
-bagheera.roar()
-bagheera.hunt()
-print(isinstance(bagheera, Animals))
+    bagheera.roar()
+    bagheera.hunt()
+    print(isinstance(bagheera, Animals))
 
 
 # 1.a. Create a new class Human and use multiple inheritance to create Centaur class,
@@ -121,11 +122,12 @@ class Centaur(Human, Animals):
     def gallop(self):
         print(f"{self.name} is galloping")
 
-
-oreius = Centaur("Oreius")
-oreius.eat()
-oreius.study()
-oreius.gallop()
+        
+if __name__ == "__main__":
+    oreius = Centaur("Oreius")
+    oreius.eat()
+    oreius.study()
+    oreius.gallop()
 
 
 # 2. Create two classes: Person, Cell Phone, one for composition, another one for aggregation.
@@ -148,9 +150,10 @@ class Arm:
         self.name = name
 
 
-person = Person()
-for arm in person.arms:
-    print(arm.name)
+if __name__ == "__main__":
+    person = Person()
+    for arm in person.arms:
+        print(arm.name)
 
 # b.
 
@@ -171,10 +174,11 @@ class Screen:
         self.screen_type = screen_type
 
 
-screen1 = Screen("Touchscreen")
-smartphone = CellPhone(screen1)
-print(screen1.screen_type)
-print(smartphone.screen.screen_type)
+if __name__ == "__main__":        
+    screen1 = Screen("Touchscreen")
+    smartphone = CellPhone(screen1)
+    print(screen1.screen_type)
+    print(smartphone.screen.screen_type)
 
 
 # 3.
@@ -197,9 +201,10 @@ class Profile:
     def __str__(self):
         return str(self.params)
 
-
-user = Profile('Jacob', 'McKenzie', '0335557799', 'Endless Summer Str.', 'jacob.l@mail.com', '09.02.1991', '30', 'male')
-print(user)
+    
+if __name__ == "__main__":
+    user = Profile('Jacob', 'McKenzie', '0335557799', 'Endless Summer Str.', 'jacob.l@mail.com', '09.02.1991', '30', 'male')
+    print(user)
 
 # 4.* Create an interface for the Laptop with the next methods: Screen, Keyboard, Touchpad, WebCam, Ports, Dynamics
 # and create an HPLaptop class by using your interface.
@@ -261,11 +266,12 @@ class HPLaptop(Laptop):
         print(f"{self.__class__.__name__} has {self.dynamics_laptop} dynamics")
 
 
-laptop = HPLaptop('IPS', 'Gaming key', 'Multi-Touch', 'HD 720p 1280x720', 'HDMI, USB', 'Bang & Olufsen')
+if __name__ == "__main__":       
+    laptop = HPLaptop('IPS', 'Gaming key', 'Multi-Touch', 'HD 720p 1280x720', 'HDMI, USB', 'Bang & Olufsen')
 
-laptop.screen()
-laptop.keyboard()
-laptop.touchpad()
-laptop.webcam()
-laptop.ports()
-laptop.dynamics()
+    laptop.screen()
+    laptop.keyboard()
+    laptop.touchpad()
+    laptop.webcam()
+    laptop.ports()
+    laptop.dynamics()
