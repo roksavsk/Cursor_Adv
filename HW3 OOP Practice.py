@@ -118,7 +118,7 @@ class Realtor(metaclass=RealtorMeta):
         print(f"Realtor agreed to give you {self.discount}% discount.")
 
     def steal_money(self, person, house):
-        if random.randint(1, 100) == 10:
+        if random.randint(1, 10) == 10:
             person.money_avail -= house.cost
             print(f"Oh no, realtor stole your money.")
         else:
