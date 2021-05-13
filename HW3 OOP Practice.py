@@ -89,7 +89,7 @@ class Home(House):
         print(f"Discount was applied to house cost and now it costs {self.cost}.")
 
 
-class SmallTypicalHouse(House):
+class SmallTypicalHouse(Home):
     def __init__(self, cost, area=40):
         super().__init__(area, cost)
 
@@ -105,13 +105,15 @@ class RealtorMeta(type):
 
 
 class Realtor(metaclass=RealtorMeta):
-    def __init__(self, name, houses, discount):
+    def __init__(self, name, houses: list, discount):
         self.name = name
         self.houses = houses
         self.discount = discount
 
     def provide_info(self):
-        print(f"Hi, my name is {self.name}. I'm realtor and have {self.houses} houses to sell and can give {self.discount}% discount.")
+        print(f"Hi, my name is {self.name}. I'm realtor and have {len(self.houses)} houses to sell and can give {self.discount}% discount. I can offer you such options:")
+        for house in self.houses:
+            print(f"This house has {house.area} area and costs {house.cost}.")
 
     def give_discount(self):
         self.discount += random.randint(5, 50)
@@ -122,13 +124,15 @@ class Realtor(metaclass=RealtorMeta):
             person.money_avail -= house.cost
             print(f"Oh no, realtor stole your money.")
         else:
-            print(f"You're lucky, realtor {self.name} was a good man, so you made a great deal and now own a house.")
+            print(f"You're lucky, realtor {self.name} was a good man, so you've made a great deal and now own a house.")
 
 
 if __name__ == '__main__':
     person1 = Person('Percival', 25, 1000)
-    house1 = Home(70, 20000)
-    realtor1 = Realtor('Lancelot', 15, 3)
+    house1 = Home(70, 30000)
+    house2 = SmallTypicalHouse(15000)
+    house3 = Home(50, 25000)
+    realtor1 = Realtor('Lancelot', [house1, house2, house3], 3)
     person1.info()
     person1.make_money()
     realtor1.provide_info()
