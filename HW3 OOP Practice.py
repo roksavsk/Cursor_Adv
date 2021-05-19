@@ -43,7 +43,7 @@ class Human(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def buy_house(self):
+    def buy_house(self, house, realtor):
         raise NotImplementedError
 
 
@@ -61,11 +61,12 @@ class Person(Human):
         self.money_avail += random.randint(5000, 50000)
         print(f'{self.name} received payment and now has {self.money_avail} money.')
 
-    def buy_house(self, house):
+    def buy_house(self, house, realtor):
         if self.money_avail > house.cost:
             self.money_avail -= house.cost
             print(f'Congratulations! You just bought a house!')
             self.own_home = True
+            realtor.houses.pop()
         else:
             print(f"Sorry, you don't have enough money.")
 
@@ -76,7 +77,7 @@ class House(ABC):
         self.cost = cost
 
     @abstractmethod
-    def apply_discount(self):
+    def apply_discount(self, realtor):
         raise NotImplementedError
 
 
@@ -85,7 +86,7 @@ class Home(House):
         super().__init__(area, cost)
 
     def apply_discount(self, realtor):
-        self.cost -= int(self.cost * realtor.discount/100)
+        self.cost -= int(self.cost * realtor.discount / 100)
         print(f"Discount was applied to house cost and now it costs {self.cost}.")
 
 
@@ -140,6 +141,8 @@ if __name__ == '__main__':
     realtor1.provide_info()
     realtor1.give_discount()
     house1.apply_discount(realtor1)
-    person1.buy_house(house1)
+    person1.buy_house(house1, realtor1)
     realtor1.steal_money(person1, house1)
+    realtor1.provide_info()
+
 
