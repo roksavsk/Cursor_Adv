@@ -16,6 +16,56 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `phone_companies`
+--
+
+DROP TABLE IF EXISTS `phone_companies`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `phone_companies` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` char(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `phone_companies`
+--
+
+LOCK TABLES `phone_companies` WRITE;
+/*!40000 ALTER TABLE `phone_companies` DISABLE KEYS */;
+INSERT INTO `phone_companies` VALUES (1,'Xiaomi'),(2,'Apple'),(3,'Samsung');
+/*!40000 ALTER TABLE `phone_companies` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `phones`
+--
+
+DROP TABLE IF EXISTS `phones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `phones` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `phone_name` char(255) DEFAULT NULL,
+  `company_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `phones`
+--
+
+LOCK TABLES `phones` WRITE;
+/*!40000 ALTER TABLE `phones` DISABLE KEYS */;
+INSERT INTO `phones` VALUES (1,'Xiaomi Redmi Note',1,1),(2,'iPhone XR',2,3),(3,'Samsung Galaxy',3,4);
+/*!40000 ALTER TABLE `phones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -39,7 +89,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Liubomyr','Luzhnyi','bla bla bla bla bla lb a bla bla bla bla bla bla',1,'test@email.com'),(3,'Vasyl','Mykutko','bla bla bla bla',1,'test@email.com'),(4,'Roman','Bondar','bla bla bla bla bla lb a bla bla bla bla bla bla1',1,'test@email.com');
+INSERT INTO `users` VALUES (1,'Liubomyr','Luzhnyi','bla bla bla bla bla lb a bla bla bla bla bla bla',1,'test@email.com'),(2,'Ilona','Zrini','princess',0,'test@email.com'),(3,'Vasyl','Mykutko','bla bla bla bla',1,'test@email.com'),(4,'Roman','Bondar','bla bla bla bla bla lb a bla bla bla bla bla bla1',1,'test@email.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +102,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-17 20:52:12
+-- Dump completed on 2021-05-19 21:40:36
