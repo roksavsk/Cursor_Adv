@@ -127,7 +127,8 @@ class Realtor(metaclass=RealtorMeta):
             person.money_avail -= house.cost
             print(f"Oh no, realtor stole your money.")
         else:
-            print(f"You're lucky, realtor {self.name} was a good man, so you've made a great deal and now own a house.")
+            if person.own_home:
+                print(f"You're lucky, realtor {self.name} was a good man, so you've made a great deal and now own a house.")
 
 
 if __name__ == '__main__':
@@ -144,5 +145,3 @@ if __name__ == '__main__':
     person1.buy_house(house1, realtor1)
     realtor1.steal_money(person1, house1)
     realtor1.provide_info()
-
-
