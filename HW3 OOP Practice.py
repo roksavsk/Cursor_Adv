@@ -66,7 +66,7 @@ class Person(Human):
             self.money_avail -= house.cost
             print(f'Congratulations! You just bought a house!')
             self.own_home = True
-            realtor.houses.pop()
+            realtor.houses.remove(house)
         else:
             print(f"Sorry, you don't have enough money.")
 
