@@ -1,0 +1,145 @@
+1. Use the simple Flask application and build Dockerfile for it.
+Create your own image (docker build) and try to run the container and interact with it by using your browser.
+Don't forget to pass the valid ports by using -p. (e.g .: -p 8080: 8080)
+Try to use such commands:
+- docker run (with -d, -it, or without) {id}/{name},
+- docker stop {id}/{name},
+- docker attach {id}/{name},
+- docker inspect {id}/{name},
+- docker logs {id}/{name}
+
+roksav@DESKTOP-20B9G3E:~/.azure/HW8$ docker build -t flask_app .
+roksav@DESKTOP-20B9G3E:~/.azure/HW8$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+flask_app    latest    23585421028e   18 seconds ago   422MB
+ubuntu       latest    7e0aa2d69a15   4 weeks ago      72.7MB
+jenkins      2.60.3    cd14cecfdb3a   2 years ago      696MB
+roksav@DESKTOP-20B9G3E:~/.azure/HW8$ docker run -d flask_app
+3ef320f91eb5210b780ba4b43fe5ba0534e0b8a3c7b206e965448f7bd0281d06
+roksav@DESKTOP-20B9G3E:~/.azure/HW8$ docker ps
+CONTAINER ID   IMAGE       COMMAND                  CREATED          STATUS          PORTS     NAMES
+3ef320f91eb5   flask_app   "/bin/sh -c 'FLASK_A…"   17 seconds ago   Up 17 seconds             beautiful_lamarr
+roksav@DESKTOP-20B9G3E:~/.azure/HW8$ docker attach 3
+roksav@DESKTOP-20B9G3E:~$ docker stop 3
+3
+roksav@DESKTOP-20B9G3E:~/.azure/HW8$ docker run -p 8000:8080 flask_app
+ * Serving Flask app '/opt/app.py' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://172.17.0.2:8080/ (Press CTRL+C to quit)
+172.17.0.1 - - [27/May/2021 11:07:46] "GET / HTTP/1.1" 200 -
+172.17.0.1 - - [27/May/2021 11:07:46] "GET /favicon.ico HTTP/1.1" 404 -
+roksav@DESKTOP-20B9G3E:~$ docker ps
+CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+67411992222b   flask_app   "/bin/sh -c 'FLASK_A…"   2 minutes ago   Up 2 minutes   0.0.0.0:8000->8080/tcp, :::8000->8080/tcp   hardcore_galois
+roksav@DESKTOP-20B9G3E:~$ docker stop 67
+67
+roksav@DESKTOP-20B9G3E:~/.azure/HW8$ docker run -it flask_app
+ * Serving Flask app '/opt/app.py' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://172.17.0.2:8080/ (Press CTRL+C to quit)
+roksav@DESKTOP-20B9G3E:~$ docker ps
+CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS         PORTS     NAMES
+b503c015ee17   flask_app   "/bin/sh -c 'FLASK_A…"   3 minutes ago   Up 3 minutes             great_aryabhata
+roksav@DESKTOP-20B9G3E:~$ docker stop b5
+b5
+roksav@DESKTOP-20B9G3E:~/.azure/HW8$ docker run -d flask_app
+39e960f5f28b7365926c97a771b3f577a9110f75a030b705cf9e6d758046d866
+roksav@DESKTOP-20B9G3E:~/.azure/HW8$ docker inspect 39
+[
+    {
+        "Id": "39e960f5f28b7365926c97a771b3f577a9110f75a030b705cf9e6d758046d866",
+        "Created": "2021-05-27T11:18:48.1781737Z",
+        "Path": "/bin/sh",
+        "Args": [
+            "-c",
+            "FLASK_APP=/opt/app.py flask run --host=0.0.0.0 --port=8080"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 6580,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2021-05-27T11:18:48.7852578Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+roksav@DESKTOP-20B9G3E:~/.azure/HW8$ docker logs 39
+ * Serving Flask app '/opt/app.py' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://172.17.0.2:8080/ (Press CTRL+C to quit)
+roksav@DESKTOP-20B9G3E:~/.azure/HW8$ docker stop 39
+
+Change the flask application to print your name and rebuild the image. Run the container again to verify the result.
+
+roksav@DESKTOP-20B9G3E:~/.azure/HW8$ docker build -t flask_app .
+roksav@DESKTOP-20B9G3E:~/.azure/HW8$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED              SIZE
+flask_app    latest    3f414545c281   About a minute ago   422MB
+<none>       <none>    23585421028e   54 minutes ago       422MB
+ubuntu       latest    7e0aa2d69a15   4 weeks ago          72.7MB
+jenkins      2.60.3    cd14cecfdb3a   2 years ago          696MB
+roksav@DESKTOP-20B9G3E:~/.azure/HW8$ docker run -p 8000:8080 flask_app
+ * Serving Flask app '/opt/app.py' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://172.17.0.2:8080/ (Press CTRL+C to quit)
+172.17.0.1 - - [27/May/2021 11:32:10] "GET / HTTP/1.1" 200 -
+172.17.0.1 - - [27/May/2021 11:32:51] "GET /hello HTTP/1.1" 200 -
+172.17.0.1 - - [27/May/2021 11:33:16] "GET /user HTTP/1.1" 200 -e
+
+
+2*.
+• docker run -it --name my_story ubuntu
+• In the container, run echo "Your story" > story.txt
+• Install cowsay with apt-get install cowsay and execute cat story.txt|cowsay.
+• In another terminal window, run docker run -it --name my_story_2 ubuntu
+• Using ls, check that there is no joke.txt file, because you are in another different container. Also,
+there is no cowsay command.
+
+roksav@DESKTOP-20B9G3E:~/.azure/HW8$ docker run -it --name my_story ubuntu
+root@1e28f56a3c3c:/# echo "A friendly desert community where the sun is hot, the moon is beautiful, and mysterious lights pass overhead while we all pretend to sleep. Welcome to Night Vale." > story.txt
+root@1e28f56a3c3c:/# apt-get update && apt-get install cowsay
+root@1e28f56a3c3c:/# cat story.txt|/usr/games/cowsay
+ ________________________________________
+/ A friendly desert community where the  \
+| sun is hot, the moon is beautiful, and |
+| mysterious lights pass overhead while  |
+| we all pretend to sleep. Welcome to    |
+\ Night Vale.                            /
+ ----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+roksav@DESKTOP-20B9G3E:~$ docker run -it --name my_story_2 ubuntu
+root@c427d426c1e2:/# ls
+bin   dev  home  lib32  libx32  mnt  proc  run   srv  tmp  var
+boot  etc  lib   lib64  media   opt  root  sbin  sys  usr
+root@c427d426c1e2:/# cat joke.txt|cowsay
+bash: cowsay: command not found
+cat: joke.txt: No such file or directory
