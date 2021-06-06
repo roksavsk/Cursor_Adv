@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calc</title>
+</head>
+    <body>
+        {% if func == 'Null' %}
+            <h1> Wrong operation </h1>
+        {% elif func == div and y == 0 %}
+            <h1> You can't divide by zero </h1>
+        {% else %}
+            <h1> {{x}} {{func}} {{y}} = {{result}} </h1>
+        {% endif %}
+    </body>
+</html>
