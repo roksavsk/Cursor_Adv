@@ -22,7 +22,7 @@ def calc(x, y, func):
         else:
             return render_template('calc.html', x=x, y=y, func='/', result=x/y)
     else:
-        return render_template('calc.html', func='Null')
+        return render_template('calc.html', func='None')
 
 
 if __name__ == '__main__':
