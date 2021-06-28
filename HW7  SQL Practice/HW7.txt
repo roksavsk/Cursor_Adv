@@ -1,0 +1,55 @@
+1. Insert dump of shop.sql to your local database
+
+roksa@roksa-VirtualBox:~$ sudo mysql -u root -password=root shop < shop.sql
+
+2. Modify table products add user_id as foreign key
+
+mysql> ALTER TABLE products ADD COLUMN user_id INT NOT NULL;
+Query OK, 0 rows affected (0,09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> UPDATE products SET user_id=1;
+Query OK, 1 row affected (0,06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> ALTER TABLE products ADD FOREIGN KEY (user_id) REFERENCES users (id);
+Query OK, 1 row affected (0,10 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> SHOW COLUMNS FROM products;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| id          | int          | NO   | PRI | NULL    | auto_increment |
+| title       | varchar(255) | NO   |     | NULL    |                |
+| meta_title  | char(255)    | YES  |     | NULL    |                |
+| description | varchar(400) | YES  |     | NULL    |                |
+| price       | double       | NO   |     | NULL    |                |
+| old_price   | double       | YES  |     | NULL    |                |
+| is_active   | tinyint(1)   | YES  |     | NULL    |                |
+| user_id     | int          | NO   | MUL | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+8 rows in set (0,00 sec)
+
+
+3. Select users, their products, categories and images and write this query to file.
+
+mysql> SELECT users.first_name, products.title, c.title, pi.file FROM users INNER JOIN products ON users.id=products.user_id INNER JOIN categories_products as cp ON cp.product_id=products.id INNER JOIN categories as c ON c.id=cp.category_id INNER JOIN product_images as
+pi ON pi.product_id=products.id;
++------------+-------+-------+------------------------------------------------------------------------------------+
+| first_name | title | title | file                                                                               |
++------------+-------+-------+------------------------------------------------------------------------------------+
+| Liubomyr   | Rolex | Watch | https://res.cloudinary.com/hz3gmuqw6/image/upload/v1621495544/cooking_yx2glg.jpg   |
+| Liubomyr   | Rolex | Watch | 11https://res.cloudinary.com/hz3gmuqw6/image/upload/v1621495544/cooking_yx2glg.jpg |
+| Liubomyr   | Rolex | Watch | 2https://res.cloudinary.com/hz3gmuqw6/image/upload/v1621495544/cooking_yx2glg.jpg  |
++------------+-------+-------+------------------------------------------------------------------------------------+
+3 rows in set (0,00 sec)
+
+mysql> SELECT users.first_name, products.title, c.title, pi.file FROM users INNER JOIN products ON users.id=products.user_id INNER JOIN categories_products as cp ON cp.product_id=products.id INNER JOIN categories as c ON c.id=cp.category_id INNER JOIN product_images as
+    -> pi ON pi.product_id=products.id INTO OUTFILE '/var/lib/mysql-files/task3.txt';;
+Query OK, 3 rows affected (0,04 sec)
+
+
+
+
+
