@@ -1,0 +1,64 @@
+1. Save the ubuntu images to a tar/zip archive and then extract the layers and metadata files from them.(Tip: use `docker save -o` command)
+
+roksav@DESKTOP-20B9G3E:~$ docker images
+REPOSITORY       TAG       IMAGE ID       CREATED       SIZE
+flask_app_db     latest    a67fe8fdbccd   3 days ago    70.6MB
+task_flask_app   latest    a67fe8fdbccd   3 days ago    70.6MB
+flask_app        0.0.1     3ca871a3e92e   3 days ago    56.8MB
+flask_app        latest    3f414545c281   3 days ago    422MB
+ubuntu           20.10     69040ea16df0   5 days ago    79.4MB
+mysql            5.7       2c9028880e58   2 weeks ago   447MB
+ubuntu           latest    7e0aa2d69a15   5 weeks ago   72.7MB
+my_image         latest    c9cb7a151bfc   5 weeks ago   72.7MB
+roksav@DESKTOP-20B9G3E:~$ docker save -o ubuntu.tar ubuntu
+roksav@DESKTOP-20B9G3E:~$ ls -sh ubuntu.tar
+150M ubuntu.tar
+roksav@DESKTOP-20B9G3E:~$ tar -xvf ubuntu.tar -C cursor
+095aa713dc390a8c8e3f45db532c40467d57ed8016800f1ffb23864b3ec334cf/
+095aa713dc390a8c8e3f45db532c40467d57ed8016800f1ffb23864b3ec334cf/VERSION
+095aa713dc390a8c8e3f45db532c40467d57ed8016800f1ffb23864b3ec334cf/json
+095aa713dc390a8c8e3f45db532c40467d57ed8016800f1ffb23864b3ec334cf/layer.tar
+15cbe1c29902a1020a4a47c835a82f0416f1896f02fac942fdd35d326c63fa22/
+15cbe1c29902a1020a4a47c835a82f0416f1896f02fac942fdd35d326c63fa22/VERSION
+15cbe1c29902a1020a4a47c835a82f0416f1896f02fac942fdd35d326c63fa22/json
+15cbe1c29902a1020a4a47c835a82f0416f1896f02fac942fdd35d326c63fa22/layer.tar
+58389d83a39da794257e8632f41b2a8f2d624758584a24a9e8ae470a635f239f/
+58389d83a39da794257e8632f41b2a8f2d624758584a24a9e8ae470a635f239f/VERSION
+58389d83a39da794257e8632f41b2a8f2d624758584a24a9e8ae470a635f239f/json
+58389d83a39da794257e8632f41b2a8f2d624758584a24a9e8ae470a635f239f/layer.tar
+69040ea16df09b627e155acc7762b65b4474f341a3b09fee9b9f7e003224b8ad.json
+6d56becb66b184f78b25f61dc91f68fcfce4baeecb3a8dcb21ada2306091aab7/
+6d56becb66b184f78b25f61dc91f68fcfce4baeecb3a8dcb21ada2306091aab7/VERSION
+6d56becb66b184f78b25f61dc91f68fcfce4baeecb3a8dcb21ada2306091aab7/json
+6d56becb66b184f78b25f61dc91f68fcfce4baeecb3a8dcb21ada2306091aab7/layer.tar
+7e0aa2d69a153215c790488ed1fcec162015e973e49962d438e18249d16fa9bd.json
+cd62e43aff2a829a2409e7cf88e9c5108d2398563033f2f527366dc08bc6c9b2/
+cd62e43aff2a829a2409e7cf88e9c5108d2398563033f2f527366dc08bc6c9b2/VERSION
+cd62e43aff2a829a2409e7cf88e9c5108d2398563033f2f527366dc08bc6c9b2/json
+cd62e43aff2a829a2409e7cf88e9c5108d2398563033f2f527366dc08bc6c9b2/layer.tar
+fd3755c842b8d9e7825ab59f482d385c219bfcbf02fa0815f7680315978fd9e7/
+fd3755c842b8d9e7825ab59f482d385c219bfcbf02fa0815f7680315978fd9e7/VERSION
+fd3755c842b8d9e7825ab59f482d385c219bfcbf02fa0815f7680315978fd9e7/json
+fd3755c842b8d9e7825ab59f482d385c219bfcbf02fa0815f7680315978fd9e7/layer.tar
+manifest.json
+repositories
+
+2*. Run a container that outputs the current date and time in Rome. Should be only Dockerfile.(Tip: user 'tzdata' library)
+
+roksav@DESKTOP-20B9G3E:~/.azure/cursor/HW9$ docker build -t rome .
+[+] Building 2.2s (5/5) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                                                  0.1s
+ => => transferring dockerfile: 95B                                                                                                                                   0.0s
+ => [internal] load .dockerignore                                                                                                                                     0.0s
+ => => transferring context: 2B                                                                                                                                       0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:20.04                                                                                                       1.9s
+ => CACHED [1/1] FROM docker.io/library/ubuntu:20.04@sha256:adf73ca014822ad8237623d388cedf4d5346aa72c270c5acc01431cc93e18e2d                                          0.0s
+ => => resolve docker.io/library/ubuntu:20.04@sha256:adf73ca014822ad8237623d388cedf4d5346aa72c270c5acc01431cc93e18e2d                                                 0.0s
+ => exporting to image                                                                                                                                                0.0s
+ => => exporting layers                                                                                                                                               0.0s
+ => => writing image sha256:ddfe7f97a46f85b8649eaac126e081c416807a7771b384c87800f5640bcad43d                                                                          0.0s
+ => => naming to docker.io/library/rome                                                                                                                               0.0s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+roksav@DESKTOP-20B9G3E:~/.azure/cursor/HW9$ docker run rome
+Mon May 31 11:20:14 Italy 2021
