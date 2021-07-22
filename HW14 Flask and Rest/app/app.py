@@ -72,23 +72,25 @@ class TodoList(Resource):
 
 class Weather(Resource):
     def get(self):
+        weather = []
+        city_name = request.args.get('city')
+        cities_list = city_name.split(",")
+        for city in cities_list:
+            querystring = {"q": city, "cnt": 1, "mode": "null", "lon": '', "type": "link, accurate", "lat": "",
+                           "units": "imperial, metric"}
 
-        city = request.form.get("city")
-        querystring = {"q": city, "cnt": "1", "mode": "null", "lon": "0", "type": "link, accurate", "lat": "0",
-                       "units": "metric"}
+            headers = {
+                'x-rapidapi-key': Config.WEATHER_API_KEY,
+                'x-rapidapi-host': Config.WEATHER_API_HOST
+            }
 
-        headers = {
-            'x-rapidapi-key': Config.WEATHER_API_KEY,
-            'x-rapidapi-host': Config.WEATHER_API_HOST
-        }
-
-        response = requests.request("GET", Config.WEATHER_API_URL, headers=headers, params=querystring)
-        if response.status_code == 200:
-            data = response.json()
-            weather = data['list'][0]
-            return render_template("weather.html", weather=weather)
-
-        return Response(status=404)
+            response = requests.request("GET", Config.WEATHER_API_URL, headers=headers, params=querystring)
+            if response.status_code == 200:
+                data = response.json()
+                weather.append(data['list'])
+            else:
+                return Response(status=404)
+        return weather
 
 
 api.add_resource(Weather, '/weather')
