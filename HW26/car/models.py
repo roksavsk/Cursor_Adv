@@ -3,12 +3,78 @@ from django.db import models
 
 class Car(models.Model):
     color = models.ForeignKey('car.Color', on_delete=models.CASCADE)
-    dealer = models.ForeignKey('dealer.Dealer', on_delete=models.CASCADE)
-    model = models.ForeignKey('car.Model', on_delete=models.SET_NULL, null=True)
-    engine_type = models.CharField(max_length=75)
-    population_type = models.CharField(max_length=75)
+    dealer = models.ForeignKey('dealer.Dealer', on_delete=models.CASCADE, related_name='cars')
+    model = models.ForeignKey('car.Model', on_delete=models.SET_NULL, null=True, related_name='cars')
+
+    ENGINE_GASOLINE = 'Gasoline'
+    ENGINE_DIESEL = 'Diesel'
+    ENGINE_ROTARY = 'Rotary'
+    ENGINE_HYBRID = 'Hybrid'
+    ENGINE_ELECTRIC = 'Electric'
+
+    ENGINE_CHOICES = (
+        (ENGINE_GASOLINE, 'Gasoline'),
+        (ENGINE_DIESEL, 'Diesel'),
+        (ENGINE_ROTARY, 'Rotary'),
+        (ENGINE_HYBRID, 'Hybrid'),
+        (ENGINE_ELECTRIC, 'Electric'),
+    )
+
+    engine_type = models.CharField(
+        max_length=55,
+        choices=ENGINE_CHOICES,
+        default=ENGINE_GASOLINE,
+        blank=True
+    )
+
+    POLLUTANT_A = 'A'
+    POLLUTANT_A2 = 'A+'
+    POLLUTANT_B = 'B'
+    POLLUTANT_C = 'C'
+    POLLUTANT_D = 'D'
+    POLLUTANT_E = 'E'
+    POLLUTANT_F = 'F'
+    POLLUTANT_G = 'G'
+
+    POLLUTANT_CHOICES = (
+        (POLLUTANT_A, 'A'),
+        (POLLUTANT_A2, 'A+'),
+        (POLLUTANT_B, 'B'),
+        (POLLUTANT_C, 'C'),
+        (POLLUTANT_D, 'D'),
+        (POLLUTANT_E, 'E'),
+        (POLLUTANT_F, 'F'),
+        (POLLUTANT_G, 'G'),
+    )
+
+    pollutant_type = models.CharField(
+        max_length=55,
+        choices=POLLUTANT_CHOICES,
+        default=POLLUTANT_A,
+        blank=True
+    )
+
     price = models.PositiveIntegerField(default=0)
-    fuel_type = models.CharField(max_length=75)
+
+    FUEL_GASOLINE = 'Gasoline'
+    FUEL_GAS = 'Gasoline/Gas'
+    FUEL_HYBRID = 'Hybrid'
+    FUEL_DIESEL = 'Diesel'
+    FUEL_ELECTRIC = 'Electric'
+
+    FUEL_CHOICES = (
+        (FUEL_GASOLINE, 'Gasoline'),
+        (FUEL_GAS, 'Gasoline/Gas'),
+        (FUEL_HYBRID, 'Hybrid'),
+        (FUEL_DIESEL, 'Diesel'),
+        (FUEL_ELECTRIC, 'Electric'),
+    )
+    fuel_type = models.CharField(
+        max_length=55,
+        choices=FUEL_CHOICES,
+        default=FUEL_GASOLINE,
+        blank=True
+    )
 
     STATUS_PENDING = 'pending'
     STATUS_PUBLISHED = 'published'
@@ -23,14 +89,32 @@ class Car(models.Model):
     )
 
     status = models.CharField(
-        max_length=15,
+        max_length=55,
         choices=STATUS_CHOICES,
         default=STATUS_PENDING,
         blank=True
     )
     doors = models.PositiveSmallIntegerField(default=4)
     capacity = models.PositiveIntegerField()
-    gear_case = models.CharField(max_length=75)
+
+    GEAR_AUTOMATIC = 'Automatic'
+    GEAR_SEMI = 'Semi-automatic'
+    GEAR_MECHANICAL = 'Mechanical'
+    GEAR_ROBOTIC = 'Robotic'
+
+    GEAR_CHOICES = (
+        (GEAR_AUTOMATIC, 'Automatic'),
+        (GEAR_SEMI, 'Semi-automatic'),
+        (GEAR_MECHANICAL, 'Mechanical'),
+        (GEAR_ROBOTIC, 'Robotic'),
+    )
+
+    gear_case = models.CharField(
+        max_length=55,
+        choices=GEAR_CHOICES,
+        default=POLLUTANT_A,
+        blank=True
+    )
     number = models.CharField(max_length=15)
     slug = models.SlugField(max_length=75)
     sitting_place = models.PositiveSmallIntegerField(default=4)
@@ -58,7 +142,7 @@ class Color(models.Model):
 
 
 class Model(models.Model):
-    brand = models.ForeignKey('car.Brand', on_delete=models.CASCADE)
+    brand = models.ForeignKey('car.Brand', on_delete=models.CASCADE, related_name='models')
     name = models.CharField(max_length=75)
 
     def __str__(self):
