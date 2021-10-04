@@ -16,7 +16,7 @@ class Order(models.Model):
         (STATUS_CANCELLED, 'Cancelled'),
     )
 
-    car = models.ForeignKey('car.Car', on_delete=models.CASCADE)
+    car = models.ForeignKey('car.Car', on_delete=models.CASCADE, related_name='orders')
     status = models.CharField(
         max_length=15,
         choices=STATUS_CHOICES,

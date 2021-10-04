@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'car',
     'dealer',
     'order',
+    'newsletter',
     'phonenumber_field',
 ]
 

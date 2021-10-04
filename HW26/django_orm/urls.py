@@ -38,4 +38,8 @@ urlpatterns = [
         'order/',
         include('order.urls')
     ),
+    path(
+        'newsletter/',
+        include('newsletter.urls')
+    ),
 ]
