@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'restaurant',
+    'car',
+    'dealer',
+    'order',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -76,8 +80,18 @@ WSGI_APPLICATION = 'django_orm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'django_orm',
+        'USER': 'django_orm',
+        'PASSWORD': 'django_orm',
+        'HOST': 'localhost',
+        'PORT': 5432,
+        'TEST': {
+            'HOST': 'localhost',
+            'PORT': 5432,
+            'NAME': 'django_orm_test_db',
+            'USER': 'django_orm',
+        }
     }
 }
 
