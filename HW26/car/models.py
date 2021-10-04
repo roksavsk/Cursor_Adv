@@ -95,7 +95,7 @@ class Car(models.Model):
         blank=True
     )
     doors = models.PositiveSmallIntegerField(default=4)
-    capacity = models.PositiveIntegerField()
+    capacity = models.PositiveIntegerField(default=4)
 
     GEAR_AUTOMATIC = 'Automatic'
     GEAR_SEMI = 'Semi-automatic'
@@ -112,7 +112,7 @@ class Car(models.Model):
     gear_case = models.CharField(
         max_length=55,
         choices=GEAR_CHOICES,
-        default=POLLUTANT_A,
+        default=GEAR_AUTOMATIC,
         blank=True
     )
     number = models.CharField(max_length=15)
@@ -121,6 +121,7 @@ class Car(models.Model):
     first_registration_date = models.DateTimeField(auto_now_add=True)
     engine_power = models.PositiveIntegerField()
     picture = models.ForeignKey('car.Picture', on_delete=models.CASCADE, null=True, blank=True)
+    property = models.ManyToManyField('car.Property')
 
     def __str__(self):
         return self.slug
@@ -174,7 +175,7 @@ class Picture(models.Model):
     metadata = models.TextField()
 
     def __str__(self):
-        return self.url
+        return self.url.name
 
     class Meta:
         verbose_name = 'Picture'
