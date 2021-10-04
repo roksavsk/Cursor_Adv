@@ -27,7 +27,7 @@ class Order(models.Model):
     last_name = models.CharField(max_length=75)
     email = models.EmailField(max_length=75)
     phone = PhoneNumberField(null=False, blank=False, unique=True)
-    message = models.TextField
+    message = models.TextField(blank=True)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
